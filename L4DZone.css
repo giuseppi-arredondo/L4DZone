@@ -53,52 +53,68 @@ body {
     cursor: pointer;
 }
 
-/* Sección principal */
+/* Sección principal con cuadros */
 .welcome-section {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
+    justify-content: flex-start;
+    align-items: stretch;
     margin-top: 20px;
     padding: 20px;
-    align-items: stretch; /* Cuadros del mismo alto */
 }
 
 /* Cuadro de Welcome */
 .welcome-box {
-    width: 40%; /* Restaurado */
-    padding: 30px;
+    width: 33%; /* Ancho ajustado al 1/3 */
     background: url('Blue with black.jpg') no-repeat center center;
     background-size: cover;
+    color: white;
+    padding: 20px;
     border-radius: 8px;
-    opacity: 0.8;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    height: 200px; /* Altura compacta */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-/* Cuadro de actualizaciones */
+/* Cuadro de Actualizaciones */
 .updates-box {
-    width: 40%; /* Espacio mayor */
-    padding: 20px;
+    width: 33%; /* Ancho ajustado al 1/3 */
     background-color: #001F3F;
+    color: white;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    height: 200px; /* Altura compacta */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 /* Cuadro de Premium */
 .premium-box {
-    width: 20%; /* Mitad del cuadro de Welcome */
-    padding: 20px;
+    width: 16.5%; /* La mitad del tamaño del cuadro de Welcome */
     background: url('Wallpaper_premium.jpg') no-repeat center center;
     background-size: cover;
+    color: white;
+    padding: 20px;
     border-radius: 8px;
-    opacity: 0.8;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    height: 200px; /* Altura compacta */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+/* Ajustes para los textos en las cajas */
+.welcome-box h2, .updates-box h2, .premium-box h3 {
+    font-size: 20px;
+    color: white;
+}
+
+/* Secciones adicionales */
+section {
+    padding: 20px;
+    color: white;
 }
