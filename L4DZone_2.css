@@ -1,0 +1,324 @@
+main {
+    padding: 20px;
+}
+
+
+.main-content {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.welcome-box,
+.updates-box,
+.premium-box,
+.chat-global,
+.players-section,
+.online-streams {
+    position: relative;
+    background: rgba(0, 38, 77, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; 
+}
+
+.welcome-box,
+.updates-box,
+.premium-box,
+.chat-global,
+.players-section,
+.online-streams {
+    position: relative;
+    background: rgba(0, 38, 77, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; 
+    z-index: 1; 
+}
+
+.welcome-box,
+.updates-box,
+.premium-box,
+.chat-global,
+.players-section,
+.online-streams {
+    position: relative;
+    background: rgba(0, 38, 77, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; 
+    z-index: 1;
+}
+
+.welcome-box::before,
+.updates-box::before,
+.premium-box::before,
+.players-section::before,
+.online-streams::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: -1; 
+}
+
+.welcome-box::before {
+    background-image: url('Imagenes/Wallpaper_welcome.jpg');
+}
+
+.updates-box::before {
+    background-image: none; 
+}
+
+.premium-box::before {
+    background-image: url('Imagenes/Wallpaper_premium.jpg');
+}
+
+.players-section::before {
+    background-image: url('Imagenes/Wallpaper_Players.jpg');
+}
+
+.online-streams::before {
+    background-image: url('Imagenes/Fondo_stream.jpg');
+}
+
+.welcome-box {
+    width: 50%; 
+}
+
+.updates-box {
+    width: 35%; 
+}
+
+.premium-box {
+    width: 20%; 
+}
+
+.players-section {
+    width: 30%; 
+}
+
+.welcome-box:hover,
+.updates-box:hover,
+.premium-box:hover,
+.players-section:hover,
+.online-streams:hover {
+    transform: scale(1.05);
+    background: rgba(0, 38, 77, 0.5); 
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.welcome-box:hover,
+.updates-box:hover,
+.premium-box:hover,
+.chat-global:hover,
+.players-section:hover,
+.online-streams:hover {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); 
+}
+
+.chat-global:hover {
+    transform: none; 
+}
+
+.play-queue:hover {
+    transform: none; 
+}
+
+.side-content {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.chat-global {
+    width: 70%; 
+    min-height: 500px; 
+    background: rgba(0, 38, 77, 0.3);
+    overflow-x: hidden;
+}
+
+.chat-box {
+    background-color: black;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    min-height: 450px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    background: rgba(0, 38, 77, 0.7); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-sizing: border-box; 
+}
+
+.chat-input input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    outline: none;
+}
+
+.chat-input button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: black;
+    color: white;
+    border: 1px solid #555;
+    padding: 5px 10px;
+    border-radius: 50%; 
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); 
+}
+
+.chat-input button:hover {
+    background-color: rgba(0, 38, 77, 0.9);
+    border-color: white;
+}
+
+.chat-box .chat-content {
+    display: none;
+}
+
+.players-section {
+    width: 30%;
+    background: rgba(0, 38, 77, 0.3);
+    opacity: 0.85;
+    backdrop-filter: blur(8px); 
+    border-radius: 10px;
+    padding: 20px; 
+    min-height: 500px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow-x: hidden; 
+}
+
+.players-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('Imagenes/Wallpaper_Players.jpg'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -1; 
+}
+
+.players-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.players-info div {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.players-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.players-info span {
+    font-weight: bold;
+    color: #80bfff; 
+}
+
+.players-section:hover {
+    transform: scale(1.05);
+    background: rgba(0, 38, 77, 0.5); 
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+.players-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('Imagenes/Wallpaper_Players.jpg'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -1; 
+}
+
+.play-queue-stream-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.play-queue {
+    width: 30%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+.play-queue:hover {
+    transform: none; 
+    background-color: transparent; 
+}
+.play-queue-button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+    align-self: center; 
+}
+
+.play-queue-button:hover {
+    transform: scale(1.2);
+    background-color: #45a049;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.online-streams {
+    width: 70%; 
+    background: rgba(0, 0, 0, 0.3); 
+}

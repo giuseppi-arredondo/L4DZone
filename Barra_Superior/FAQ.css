@@ -1,0 +1,70 @@
+.overlay-content {
+    background-image: url('Imagenes/Fondo_apartado_barra.jpg'); 
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    padding: 40px; 
+    width: 100%; 
+    max-width: 1500px; 
+    margin: 0 auto; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+    overflow: hidden;
+    position: relative; 
+}
+
+
+.overlay-content h1,
+.overlay-content h2,
+.overlay-content p {
+    color: #ffffff; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+}
+
+.overlay-content h1 {
+    font-size: 3em; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.overlay-content h2 {
+    font-size: 2.2em; 
+    margin-top: 20px;
+    text-align: center;
+}
+
+.overlay-content p {
+    font-size: 1.2em;
+    line-height: 1.8em;
+    margin: 10px 0;
+}
+
+.overlay-content ul,
+.overlay-content ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.overlay-content li {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .overlay-content {
+        width: 90%; 
+    }
+
+    .overlay-content h1 {
+        font-size: 2.5em; 
+    }
+
+    .overlay-content h2 {
+        font-size: 2em;
+    }
+
+    .overlay-content p {
+        font-size: 1em;
+    }
+}

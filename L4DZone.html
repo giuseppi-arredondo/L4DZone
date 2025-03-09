@@ -3,83 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="L4DZone.css">
     <title>L4DZone</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="L4DZone_2.css">
+    <link rel="stylesheet" href="L4DZone.css">
 </head>
 <body>
-    <!-- Contenedor del encabezado -->
-    <div class="header-container">
-        <!-- Encabezado principal con el logo integrado -->
-        <div class="header">
-            <span class="title-text">L4D</span>
-            <img src="icon_page_l4dzone.png" alt="Z Logo" class="z-logo">
-            <span class="title-text">One</span>
+    <header>
+        <div class="logo">
+            <span class="site-name">L4D</span>
+            <img src="Imagenes/Logo_l4dzone.png" alt="L4DZone Logo" class="logo-img">
+            <span class="site-name">one</span>
         </div>
-        <!-- Navegación izquierda -->
-        <div class="nav-left">
-            <button class="nav-button">FAQ</button>
-            <button class="nav-button">Rules</button>
-            <button class="nav-button">Stats</button>
-            <button class="nav-button">Ratings</button>
-            <button class="nav-button">Maps</button>
-            <button class="nav-button">SourceBans</button>
+        
+        <div id="menu">
+            <button onclick="showOverlay('faq')">FAQ</button>
+            <button onclick="showOverlay('rules')">Rules</button>
+            <button onclick="showOverlay('stats')">Stats</button>
+            <button onclick="showOverlay('ratings')">Ratings</button>
+            <button onclick="showOverlay('maps')">Maps</button>
+            <button onclick="showOverlay('sourcebans')">SourceBans</button>
+            <button onclick="showOverlay('contact')">Contact Admins</button>
         </div>
-        <!-- Navegación derecha -->
-        <div class="nav-right">
-            <span class="user-info">Visitor<br><small>Not logged in</small></span>
-            <button class="login-button">Login Steam</button>
-        </div>
+        
+        <!-- Contenedor principal del Overlay -->
+<div id="overlay" class="overlay">
+    <ul class="nav nav-tabs" id="overlayTabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#faq">FAQ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#rules">Rules</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#stats">Stats</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#ratings">Ratings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#maps">Maps</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#sourcebans">SourceBans</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#contact">Contact</a>
+        </li>
+    </ul>
+
+    <div class="logo">
+        <span class="site-name">L4D</span>
+        <img src="Imagenes/Logo_l4dzone.png" alt="L4DZone Logo" class="logo-img">
+        <span class="site-name">one</span>
     </div>
-
-    <!-- Sección Principal con 3 cuadros -->
-    <div class="welcome-section">
-        <!-- Cuadro de Welcome -->
-        <div class="welcome-box">
-            <h2>Welcome!</h2>
-            <h3>What is L4DZone?</h3>
-            <p>
-                L4DZone is your ideal place for Left 4 Dead 2 gameplay, offering a fair environment with no cheaters,
-                ragequitters, or toxicity. Enjoy balanced matchmaking, the best AntiCheat system by Lalo HLZ, and constant
-                updates for the best gaming experience. Before jumping in, make sure to check out our guides, FAQs, and
-                queue info to get the most out of the action.
-            </p>
-        </div>
-
-        <!-- Cuadro de Actualizaciones -->
-        <div class="updates-box">
-            <h2>Latest Updates</h2>
-            <p>Stay tuned for upcoming news, including new videos on our YouTube channel, updates, or live streams!</p>
-            <button>See Updates</button>
-        </div>
-
-        <!-- Cuadro de Premium -->
-        <div class="premium-box">
-            <h3>Unlock Premium Features</h3>
-            <p>Explore all the exclusive benefits that Premium has to offer. Click here to enhance your gaming experience now!</p>
-            <button>View Premium Benefits</button>
-        </div>
+    
+    <div id="menu">
+        <button onclick="showOverlay('faq')">FAQ</button>
+        <button onclick="showOverlay('rules')">Rules</button>
+        <button onclick="showOverlay('stats')">Stats</button>
+        <button onclick="showOverlay('ratings')">Ratings</button>
+        <button onclick="showOverlay('maps')">Maps</button>
+        <button onclick="showOverlay('sourcebans')">SourceBans</button>
+        <button onclick="showOverlay('contact')">Contact Admins</button>
     </div>
-
-    <!-- Secciones adicionales -->
-    <section>
-        <h2>Global Chat</h2>
-    </section>
-
-    <section>
-        <h2>Players:</h2>
-        <ul>
-            <li><h4>Online:</h4></li>
-            <li><h4>In Game:</h4></li>
-            <li><h4>In Waiting:</h4></li>
+    
+    <!-- Contenedor principal del Overlay -->
+    <div id="overlay" class="overlay">
+        <ul class="nav nav-tabs" id="overlayTabs">
+            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#faq">FAQ</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#rules">Rules</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#stats">Stats</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#ratings">Ratings</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#maps">Maps</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#sourcebans">SourceBans</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#contact">Contact</a></li>
         </ul>
-    </section>
 
-    <section>
-        <h2>Play Queue</h2>
-    </section>
+        <!-- Contenido de las pestañas -->
+        <div class="tab-content">
+            <div id="faq" class="tab-pane fade show active"><p>Frequently Asked Questions content will be displayed here.</p></div>
+            <div id="rules" class="tab-pane fade"><iframe src="Barra_Superior/RULES.html"></iframe></div>
+            <div id="stats" class="tab-pane fade"><iframe src="Barra_Superior/STATS.html"></iframe></div>
+            <div id="ratings" class="tab-pane fade"><iframe src="Barra_Superior/RATINGS.html"></iframe></div>
+            <div id="maps" class="tab-pane fade"><iframe src="Barra_Superior/MAPS.html"></iframe></div>
+            <div id="sourcebans" class="tab-pane fade"><iframe src="Barra_Superior/SOURCEBANS.html"></iframe></div>
+            <div id="contact" class="tab-pane fade"><iframe src="Barra_Superior/CONTAC_ADMINS.html"></iframe></div>
+        </div>
+        <button class="close-btn" onclick="closeOverlay()">Cerrar</button>
+    </div>q
 
-    <section>
-        <h2>Online Streamers:</h2>
-    </section>
+        <div class="user-info">
+            <p>Visitor</p>
+            <button>Login Steam</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-content">
+            <div class="welcome-box">
+                <h2>Welcome!</h2>
+                <p>What is L4DZone?</p>
+                <p>
+                    L4DZone is your ideal place for Left 4 Dead 2 gameplay, offering a fair environment with no cheaters, ragequitters, or toxicity. Enjoy balanced matchmaking, the best AntiCheat system by Lalo HLZ, and constant updates for the best gaming experience. Before jumping in, make sure to check out our guides, FAQs, and queue info to get the most out of the action.
+                </p>
+            </div>
+
+            <div class="updates-box">
+                <h2>Latest Updates</h2>
+                <p>Stay tuned for upcoming news, including new videos on our YouTube channel, updates, or live streams!</p>
+                <div class="youtube-placeholder">YouTube Banner Placeholder</div>
+            </div>
+
+            <div class="premium-box">
+                <h2>Unlock Premium Features</h2>
+                <p>
+                    Explore all the exclusive benefits that Premium has to offer. Click here to enhance your gaming experience now!
+                </p>
+                <button>View Premium Benefits</button>
+            </div>
+        </div>
+
+        <div class="side-content">
+            <section class="chat-global">
+                <h2>Global Chat:</h2>
+                <div class="chat-box">
+                    <div class="chat-container">
+                        <p>Chat content goes here.</p>
+                    </div>
+                    <textarea class="chat-input" placeholder="Type a message..."></textarea>
+                    <button class="chat-submit-btn">▶</button> 
+                </div>
+            </section>
+
+            <section class="players-section">
+                <h2>Players:</h2>
+                <div class="players-info">
+                    <div><h4>Online:</h4><span>0</span></div>
+                    <div><h4>In Game:</h4><span>0</span></div>
+                    <div><h4>In Waiting:</h4><span>0</span></div>
+                </div>
+            </section>
+        </div>
+
+        <section class="play-queue-stream-section">
+            <div class="play-queue">
+                <button class="play-queue-button">Play Queue</button>
+                <div class="waiting-list">
+                </div>
+            </div>
+
+            <div class="online-streams">
+                <h2>Online Streamers:</h2>
+                <div class="stream-content">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="L4DZone.js"></script>
 </body>
 </html>
