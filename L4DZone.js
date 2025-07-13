@@ -7,11 +7,21 @@ function openModal(section) {
     const modal = document.getElementById("modalOverlay");
     const modalBody = document.getElementById("modalBody");
 
-    // Elimina CSS y JS anteriores
+    // Mostrar el modal
+    modal.style.display = "flex";
+
+    // Limpiar contenidos previos
     document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
     document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
 
-    // Carga HTML
+    // Botón activo en la barra de navegación del modal
+    const normalized = text => text.trim().toLowerCase().replace(/\s+/g, '_');
+    document.querySelectorAll('.modal-nav-bar button').forEach(btn => {
+        const btnKey = normalized(btn.textContent);
+        btn.classList.toggle('active', btnKey === section);
+    });
+
+    // Cargar el HTML
     fetch(`Barra_Superior/${section}.html`)
         .then(response => {
             console.log("Respuesta status:", response.status);
@@ -20,18 +30,15 @@ function openModal(section) {
         })
         .then(html => {
             modalBody.innerHTML = html;
-            modal.style.display = "flex";
-            console.log("Contenido HTML cargado:", html.length > 0 ? "Sí" : "No");
-            console.log("Contenido cargado:", html); // Para verificar si llega el HTML
 
-            // Carga CSS
+            // Cargar el CSS
             const css = document.createElement("link");
             css.rel = "stylesheet";
             css.href = `Barra_Superior/${section}.css`;
             css.setAttribute("data-dynamic-css", "true");
             document.head.appendChild(css);
 
-            // Carga JS
+            // Cargar el JS
             const js = document.createElement("script");
             js.src = `Barra_Superior/${section}.js`;
             js.defer = true;
@@ -43,14 +50,28 @@ function openModal(section) {
             console.error("Error cargando sección:", error);
         });
 }
-function showTab(tabId) {
+
+// Mostrar el contenido de la pestaña y activar el botón correspondiente
+function showTab(tabId, event) {
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.style.display = 'none';
     });
+
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
 
-    document.getElementById(tabId).style.display = 'block';
-    event.target.classList.add('active');
+    const target = document.getElementById(tabId);
+    if (target) target.style.display = 'block';
+    if (event && event.target) event.target.classList.add('active');
+}
+
+// Activar el botón de la barra de navegación del modal según la sección
+function setActiveButton(section) {
+    document.querySelectorAll('.modal-nav-bar button').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().replace(/\s+/g, '_') === section) {
+            btn.classList.add('active');
+        }
+    });
 }
