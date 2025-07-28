@@ -180,7 +180,7 @@
         </aside>
         <section class="play-queue-stream-section">
             <div class="play-queue">
-                <button class="play-queue-button" type="button">Play Queue</button>
+                <button class="play-queue-btn">Play Queue</button>
                 <div class="waiting-list"></div>
             </div>
             <div class="online-streams">
@@ -193,45 +193,57 @@
     <!-- Script principal -->
     <script src="L4DZone.js"></script>
     <script>
-        function loadSection(section) {
-            const modalBody = document.getElementById("modalBody");
-            document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
-            document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
-            fetch(`Barra_Superior/${section}.html`)
-                .then(response => {
-                    if (!response.ok) throw new Error("No se pudo cargar el archivo.");
-                    return response.text();
-                })
-                .then(html => {
-                    modalBody.innerHTML = html;
-                    const css = document.createElement("link");
-                    css.rel = "stylesheet";
-                    css.href = `Barra_Superior/${section}.css`;
-                    css.setAttribute("data-dynamic-css", "true");
-                    document.head.appendChild(css);
-                    const js = document.createElement("script");
-                    js.src = `Barra_Superior/${section}.js`;
-                    js.defer = true;
-                    js.setAttribute("data-dynamic-js", "true");
-                    document.body.appendChild(js);
-                })
-                .catch(error => {
-                    modalBody.innerHTML = "<p>Error al cargar el contenido.</p>";
-                    console.error("Error cargando sección:", error);
-                });
-        }
-        function openModal(section) {
-            document.getElementById("modalOverlay").style.display = "flex";
-            loadSection(section);
-        }
-        function closeModal() {
-            const modal = document.getElementById("modalOverlay");
-            const modalBody = document.getElementById("modalBody");
-            modal.style.display = "none";
-            modalBody.innerHTML = "";
-            document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
-            document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
-        }
-    </script>
+    function loadSection(section) {
+        const modalBody = document.getElementById("modalBody");
+
+        // Elimina CSS y JS anteriores
+        document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
+        document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
+
+        // Carga el contenido del modal
+        fetch(`Barra_Superior/${section}.html`)
+            .then(response => {
+                if (!response.ok) throw new Error("No se pudo cargar el archivo.");
+                return response.text();
+            })
+            .then(html => {
+                modalBody.innerHTML = html;
+
+                // Cargar CSS dinámico
+                const css = document.createElement("link");
+                css.rel = "stylesheet";
+                css.href = `Barra_Superior/${section}.css`;
+                css.setAttribute("data-dynamic-css", "true");
+                document.head.appendChild(css);
+
+                // Cargar JS dinámico
+                const js = document.createElement("script");
+                js.src = `Barra_Superior/${section}.js`;
+                js.defer = true;
+                js.setAttribute("data-dynamic-js", "true");
+                document.body.appendChild(js);
+            })
+            .catch(error => {
+                modalBody.innerHTML = "<p>Error al cargar el contenido.</p>";
+                console.error("Error cargando sección:", error);
+            });
+    }
+
+    function openModal(section) {
+        document.getElementById("modalOverlay").style.display = "flex";
+        loadSection(section);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("modalOverlay");
+        const modalBody = document.getElementById("modalBody");
+        modal.style.display = "none";
+        modalBody.innerHTML = "";
+
+        // Elimina cualquier CSS y JS cargado dinámicamente
+        document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
+        document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
+    }
+</script>
 </body>
 </html>

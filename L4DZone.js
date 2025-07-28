@@ -20,7 +20,7 @@ function openModal(section) {
         const btnKey = normalized(btn.textContent);
         btn.classList.toggle('active', btnKey === section);
     });
-
+ 
     // Cargar el HTML
     fetch(`Barra_Superior/${section}.html`)
         .then(response => {
@@ -75,3 +75,63 @@ function setActiveButton(section) {
         }
     });
 }
+window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    if (window.scrollY > 50) {
+        header.style.height = "60px";
+    } else {
+        header.style.height = "90px";
+    }
+});
+const navButtons = document.querySelectorAll('#menu button');
+
+function setActiveButton(id) {
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    const activeBtn = Array.from(navButtons).find(btn => btn.textContent.toLowerCase() === id);
+    if (activeBtn) activeBtn.classList.add('active');
+}
+
+function openModal(section) {
+    document.getElementById("modalOverlay").style.display = "flex";
+    loadSection(section);
+    setActiveButton(section);
+}
+function loadSection(section) {
+            const modalBody = document.getElementById("modalBody");
+            document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
+            document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
+            fetch(`Barra_Superior/${section}.html`)
+                .then(response => {
+                    if (!response.ok) throw new Error("No se pudo cargar el archivo.");
+                    return response.text();
+                })
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    const css = document.createElement("link");
+                    css.rel = "stylesheet";
+                    css.href = `Barra_Superior/${section}.css`;
+                    css.setAttribute("data-dynamic-css", "true");
+                    document.head.appendChild(css);
+                    const js = document.createElement("script");
+                    js.src = `Barra_Superior/${section}.js`;
+                    js.defer = true;
+                    js.setAttribute("data-dynamic-js", "true");
+                    document.body.appendChild(js);
+                })
+                .catch(error => {
+                    modalBody.innerHTML = "<p>Error al cargar el contenido.</p>";
+                    console.error("Error cargando sección:", error);
+                });
+        }
+        function openModal(section) {
+            document.getElementById("modalOverlay").style.display = "flex";
+            loadSection(section);
+        }
+        function closeModal() {
+            const modal = document.getElementById("modalOverlay");
+            const modalBody = document.getElementById("modalBody");
+            modal.style.display = "none";
+            modalBody.innerHTML = "";
+            document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
+            document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
+        }
