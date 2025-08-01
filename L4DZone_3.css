@@ -1386,3 +1386,207 @@ header {
 .premium-box button:hover {
     background-color: #337ab7;
 }
+/* Contenedor general */
+#chatContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 500px;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Área de mensajes */
+#chatMessages {
+    flex-grow: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background-color: #121212;
+    color: #e0e0e0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Caja de entrada de texto */
+#chatInputBox {
+    display: flex;
+    padding: 12px;
+    background-color: #1c1c1c;
+    border-top: 1px solid #333;
+}
+
+/* Input */
+#chatInput {
+    flex-grow: 1;
+    padding: 10px 14px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: background 0.2s;
+}
+
+#chatInput:focus {
+    background-color: #333;
+}
+
+/* Botón */
+#sendButton {
+    margin-left: 10px;
+    padding: 10px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#sendButton:hover {
+    background-color: #45a047;
+}
+.chat-global {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+}
+
+.chat-global h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: #00ffcc;
+    text-shadow: 0 0 5px #00ffcc44;
+}
+
+.chat-box-modern {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.chat-container-modern {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #ddd;
+}
+
+.chat-input-wrapper {
+    display: flex;
+    border-top: 1px solid #444;
+    background: rgba(10, 10, 10, 0.6);
+}
+
+.chat-input-modern {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.8rem;
+    color: #fff;
+    resize: none;
+    font-size: 1rem;
+    outline: none;
+}
+
+.chat-submit-modern {
+    background-color: #00ffcc;
+    color: #000;
+    border: none;
+    padding: 0 1.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.chat-submit-modern:hover {
+    background-color: #00ccaa;
+}
+.chat-global {
+    background: rgba(15, 15, 15, 0.6);
+    border: 2px solid #337ab7;
+    border-radius: 12px;
+    padding: 1rem;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 12px rgba(51, 122, 183, 0.4);
+    backdrop-filter: blur(6px);
+}
+
+.chat-global h2 {
+    font-size: 1.4rem;
+    color: #337ab7;
+    margin-bottom: 0.6rem;
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    height: 350px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chat-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 0.95rem;
+    color: #eee;
+}
+
+.chat-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid #337ab7;
+}
+
+.chat-input {
+    flex-grow: 1;
+    background: rgba(20, 20, 20, 0.8);
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem;
+    color: #fff;
+    font-size: 0.95rem;
+    resize: none;
+    outline: none;
+}
+
+.chat-submit-btn {
+    background-color: #337ab7;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.chat-submit-btn:hover {
+    background-color: #2e6da4;
+}

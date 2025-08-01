@@ -135,3 +135,16 @@ function loadSection(section) {
             document.querySelectorAll('[data-dynamic-css]').forEach(el => el.remove());
             document.querySelectorAll('[data-dynamic-js]').forEach(el => el.remove());
         }
+    document.getElementById("sendButton").addEventListener("click", () => {
+    const input = document.getElementById("chatInput");
+    const text = input.value.trim();
+
+    if (text !== "") {
+    const chatMessages = document.getElementById("chatMessages");
+    const message = document.createElement("div");
+    message.textContent = text;
+    chatMessages.appendChild(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    input.value = "";
+    }
+    });

@@ -1,0 +1,73 @@
+    body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0a0a0f;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    }
+
+    .banned-panel {
+    width: 95%;
+    max-width: 1000px;
+    }
+
+    .banned-player {
+    background: linear-gradient(to right, #0d1a2d, #071c34);
+    border: 2px solid #0af;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.5);
+    transition: transform 0.2s;
+    }
+
+    .banned-player:hover {
+    transform: scale(1.02);
+    }
+
+    .banned-summary {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    gap: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0af;
+    }
+
+    .banned-summary img {
+    width: 28px;
+    height: 20px;
+    border-radius: 3px;
+    }
+
+    .banned-name {
+    flex-grow: 1;
+    font-size: 1.5rem;
+    color: #ffffff;
+    }
+
+    .banned-status,
+    .banned-server {
+    font-weight: bold;
+    color: #7dd3fc;
+    }
+
+    .banned-details {
+    padding: 20px 30px;
+    display: none;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+    }
+
+    .banned-details p {
+    margin: 6px 0;
+    }
+
+    .banned-details strong {
+    font-weight: bold;
+    color: #0af;
+    }
