@@ -5,330 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SourceBans - Banned Players</title>
     <link rel="stylesheet" href="source_bans.css" />
-    <script src="source_bans.js" defer></script>
     </head>
     <body>
-    <div class="panel-wrapper">
+    <div class="container">
         <h1 class="panel-title">Banned Players</h1>
-        <div class="banned-panel">
+
+        <div class="search-row">
         <div class="search-wrapper">
-            <input id="ban-search" type="text" placeholder="Search by name, Steam ID, reason..." />
+            <input id="ban-search" type="text" placeholder="Search by name, Steam ID, reason, server..." />
+            <button id="clear-search" aria-label="Clear search">✕</button>
         </div>
-        <!-- Sample existing ones -->
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/us.png" alt="US">
-                <span class="banned-name">CHAMOY</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo Competitive</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:1:629663345</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:1259326691]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561199219592419</div>
-            <div class="detail-row"><span class="label">IP:</span> US 38.250.159.20</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 27, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Detectado Aimbot</div>
-            <div class="detail-row"><span class="label">Banned by:</span> CONSOLE</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 2</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] Custom #3 | Campaign &gt; normal</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
+        <div id="suggestions" class="suggestions"></div>
         </div>
 
-        <!-- New fake players -->
-        <div class="banned-player" onclick="toggleInfo(this)">
+        <div id="banned-panel" class="banned-panel">
+        <!-- Example player: Sz' -->
+        <div class="banned-player" data-name="Sz'" data-steam="STEAM_1:0:123456789" data-reason="Detectado Aimbot" data-server="[HLZ] Competitive #1" data-country="US" data-bannedby="CONSOLE">
             <div class="banned-summary">
             <div class="flag-name">
                 <img src="https://flagcdn.com/24x18/us.png" alt="US">
                 <span class="banned-name">Sz'</span>
             </div>
             <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo Competitive</span>
+                <div class="banned-status">Permanent Ban</div>
+                <div class="banned-server">Server: Lalo</div>
             </div>
+            <div class="expand-indicator">▶</div>
             </div>
             <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:987654321</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:1975308642]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198099999999</div>
-            <div class="detail-row"><span class="label">IP:</span> US 23.45.67.89</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 26, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> ADMIN_FEAR</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 4</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] NA Ranked</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">Steam ID:</span>
+                <span class="detail-value">STEAM_1:0:123456789</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Steam3:</span>
+                <span class="detail-value">[U:1:246813579]</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Community:</span>
+                <span class="detail-value">76561198098765432</span>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">IP:</span>
+                <span class="detail-value">US 34.203.100.55</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value">Jul 20, 2025</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Duration:</span>
+                <span class="detail-value">Permanent</span>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">Reason:</span>
+                <span class="detail-value">[Little Anti-Cheat 1.7.4] Detectado Aimbot</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Banned by:</span>
+                <span class="detail-value">CONSOLE</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Previous Bans:</span>
+                <span class="detail-value">1</span>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">Banned From:</span>
+                <span class="detail-value">[HLZ] Competitive #1</span>
+                </div>
+            </div>
             </div>
         </div>
 
-        <div class="banned-player" onclick="toggleInfo(this)">
+        <!-- Jerydash -->
+        <div class="banned-player" data-name="Jerydash" data-steam="STEAM_1:0:987654321" data-reason="Detectado Aimbot" data-server="[HLZ] NY #5 | 3v3 Zonemod v2.8.9e" data-country="ES" data-bannedby="ADMIN_RAF">
             <div class="banned-summary">
             <div class="flag-name">
                 <img src="https://flagcdn.com/24x18/es.png" alt="ES">
                 <span class="banned-name">Jerydash</span>
             </div>
             <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo EU</span>
+                <div class="banned-status">Permanent Ban</div>
+                <div class="banned-server">Server: Lalo</div>
             </div>
+            <div class="expand-indicator">▶</div>
             </div>
             <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:123123123</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:246246246]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198111111111</div>
-            <div class="detail-row"><span class="label">IP:</span> ES 85.12.45.67</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 25, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> CONSOLE</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 1</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] EU Casual</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">Steam ID:</span>
+                <span class="detail-value">STEAM_1:0:987654321</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Steam3:</span>
+                <span class="detail-value">[U:1:123456780]</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Community:</span>
+                <span class="detail-value">76561198123456789</span>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">IP:</span>
+                <span class="detail-value">ES 85.58.123.45</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value">Jul 18, 2025</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Duration:</span>
+                <span class="detail-value">Permanent</span>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">Reason:</span>
+                <span class="detail-value">[Little Anti-Cheat 1.7.4] Detectado Aimbot</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Banned by:</span>
+                <span class="detail-value">ADMIN_RAF</span>
+                </div>
+                <div class="detail-item">
+                <span class="detail-label">Previous Bans:</span>
+                <span class="detail-value">2</span>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-item">
+                <span class="detail-label">Banned From:</span>
+                <span class="detail-value">[HLZ] NY #5 | 3v3 Zonemod v2.8.9e</span>
+                </div>
+            </div>
             </div>
         </div>
 
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">JJ</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:555666777</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:111333555]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198222222222</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.100.50.25</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 24, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> ADMIN_RafaelKross</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 0</div>
-            <div class="detail-row"><span class="label">Banned From:</span> Web Ban</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
+        <!-- Add more fake entries following same structure for Sz', JJ, Sora, Jungkook, Learning, Arukii, Hirose, PeruanoGP, Stefano, Novux etc. -->
         </div>
 
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">Sora</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:1:444555666</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:110222444]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198333333333</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.120.77.88</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 23, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> CONSOLE</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 1</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] LATAM Ranked</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">Jungkook</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:222333444</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:102233344]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198444444444</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.101.88.99</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 22, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> ADMIN_FEAR</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 2</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] LATAM Competitive</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">Learning</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:1:101010101</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:101010101]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198555555555</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.200.100.50</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 21, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Bunnyhop Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> CONSOLE</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 0</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] LATAM Casual</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">Arukii</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:303030303</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:303030303]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198666666666</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.150.60.70</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 20, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Aimbot Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> ADMIN_RafaelKross</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 5</div>
-            <div class="detail-row"><span class="label">Banned From:</span> Web Ban</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/mx.png" alt="MX">
-                <span class="banned-name">Hirose</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo Mexico</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:1:707070707</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:707070707]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198777777777</div>
-            <div class="detail-row"><span class="label">IP:</span> MX 190.200.80.90</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 19, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> CONSOLE</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 2</div>
-            <div class="detail-row"><span class="label">Banned From:</span> [HLZ] Mexico Ranked</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">PeruanoGP</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:404040404</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:404040404]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198888888888</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.210.90.10</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 18, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Aimbot Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> ADMIN_FEAR</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 1</div>
-            <div class="detail-row"><span class="label">Banned From:</span> LATAM Competitive</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/pe.png" alt="PE">
-                <span class="banned-name">Stefano</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo LATAM</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:1:909090909</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:909090909]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561198999999999</div>
-            <div class="detail-row"><span class="label">IP:</span> PE 190.220.100.20</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 17, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> CONSOLE</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 0</div>
-            <div class="detail-row"><span class="label">Banned From:</span> LATAM Casual</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        <div class="banned-player" onclick="toggleInfo(this)">
-            <div class="banned-summary">
-            <div class="flag-name">
-                <img src="https://flagcdn.com/24x18/mx.png" alt="MX">
-                <span class="banned-name">Novux</span>
-            </div>
-            <div class="meta">
-                <span class="banned-status">Permanent Ban</span>
-                <span class="banned-server">Server: Lalo Mexico</span>
-            </div>
-            </div>
-            <div class="banned-details">
-            <div class="detail-row"><span class="label">Steam ID:</span> STEAM_1:0:808080808</div>
-            <div class="detail-row"><span class="label">Steam3:</span> [U:1:808080808]</div>
-            <div class="detail-row"><span class="label">Community:</span> 76561199000000000</div>
-            <div class="detail-row"><span class="label">IP:</span> MX 200.50.60.70</div>
-            <div class="detail-row"><span class="label">Date:</span> Jul 16, 2025</div>
-            <div class="detail-row"><span class="label">Duration:</span> Permanent</div>
-            <div class="detail-row"><span class="label">Reason:</span> [Little Anti-Cheat 1.7.4] Multihack Detected</div>
-            <div class="detail-row"><span class="label">Banned by:</span> ADMIN_RafaelKross</div>
-            <div class="detail-row"><span class="label">Previous Bans:</span> 3</div>
-            <div class="detail-row"><span class="label">Banned From:</span> Mexico Ranked</div>
-            <div class="detail-row"><span class="label">Blocked:</span> Never</div>
-            </div>
-        </div>
-
-        </div>
+        <div id="pagination" class="pagination"></div>
     </div>
 
     <script src="source_bans.js"></script>

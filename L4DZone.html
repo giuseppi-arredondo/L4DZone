@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-jRZUzJKXjV5xj6LVJv+g1bNqC8PjgK6sBWvK0uBfW6Zy0uR0LKfEX7fplZg53Hj+BO6LXQ6I4d6+gqWqPZL5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- CSS principal -->
     <link rel="stylesheet" href="L4DZone.css" />
@@ -134,6 +135,58 @@
                 <!-- Aquí se cargará el contenido -->
             </div>
         </div>
+    </div>
+
+    <section id="music-panel" class="dashboard-card">
+        <div class="title-block">
+            <div class="panel-title">
+                <span class="main-title">Now Playing</span>
+                <span class="sub-badge">Shared</span>
+            </div>
+            <div class="feature-tag">Premium Feature</div>
+        </div>
+
+        <div class="search-block">
+            <div class="input-wrapper">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/>
+                </svg>
+            <input id="track-query" placeholder="Search track (e.g., chill, retro)" aria-label="Track search" />
+            </div>
+            <div class="buttons">
+                <button id="search-btn" class="small">Search</button>
+                <button id="enable-audio-btn" class="small">Enable Audio</button>
+            </div>
+        </div>
+
+        <div id="now-playing" class="now-playing hidden">
+            <div class="np-info">
+            <div><strong>Track:</strong> <span id="np-title">—</span></div>
+            <div><strong>Artist:</strong> <span id="np-artist">—</span></div>
+            <div><strong>Length:</strong> <span id="np-duration">--:--</span></div>
+            </div>
+            <div class="np-controls">
+                <button id="pause-btn" aria-label="Pause/resume">Pause</button>
+                <button id="stop-btn" aria-label="Stop">Stop</button>
+            </div>
+        </div>
+    </section>
+
+        <!-- Activador -->
+    <div id="waiting-game-trigger" style="margin-top:8px; font-family: sans-serif;">
+    <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; color:#c8dfff;">¿Te aburre esperar? Prueba esto mientras tanto:</div>
+        <button id="start-game-btn" style="padding:6px 14px; background: linear-gradient(135deg,#1f3f8f,#2f6fbf); color:#fff; border:none; border-radius:6px; cursor:pointer;">Jugar</button>
+    </div>
+    </div>
+
+    <!-- Contenedor del juego (oculto hasta activar) -->
+    <div id="game-panel" style="margin-top:10px; max-width:500px; position: relative; display:none;">
+    <canvas id="waiting-game" width="500" height="120" style="background: rgba(2,12,40,0.9); border:2px solid rgba(60,140,255,0.8); border-radius:8px; display:block;"></canvas>
+    <div id="game-info" style="position:absolute; top:6px; left:10px; color:#a0cfff; font-size:12px; font-family: monospace;">
+        Score: <span id="score">0</span>
+        <span id="game-over" style="margin-left:12px; display:none; color:#ff8080;">Game Over - <button id="restart-btn" style="padding:2px 6px; background:#337ab7; color:#fff; border:none; border-radius:4px; cursor:pointer;">Reiniciar</button></span>
+    </div>
     </div>
 
     <main>
