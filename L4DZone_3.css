@@ -2588,3 +2588,164 @@ header {
     animation: fadeIn .3s ease forwards;
     }
     @keyframes fadeIn { from { opacity:0; transform: translateY(6px);} to { opacity:1; } }
+
+        /* ===== Layout fila superior 3/4 + 1/4 ===== */
+    .top-row{
+    display:grid;
+    grid-template-columns: 3fr 1fr;
+    gap:16px;
+    align-items:stretch;
+    margin:12px 0 10px;
+    }
+    @media (max-width: 1000px){
+    .top-row{ grid-template-columns: 1fr; }
+    }
+
+    /* ===== Tarjeta derecha: Jugar ===== */
+    .play-card{
+    background: rgba(4,15,45,.75);
+    border:1px solid rgba(80,180,255,.45);
+    border-radius:14px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 28px rgba(60,160,255,.25);
+    padding:12px;
+    display:flex; flex-direction:column; gap:10px;
+    color:#e6f1ff;
+    }
+    .play-card-header{
+    display:flex; align-items:center; justify-content:space-between;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight:600; letter-spacing:.2px;
+    }
+    .btn-primary, .btn-secondary{
+    background: linear-gradient(135deg,#1f3f8f,#2f6fbf);
+    border:none; border-radius:10px; color:#fff; cursor:pointer;
+    padding:8px 14px; font-weight:700; font-size:.9rem;
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    }
+    .btn-primary:hover, .btn-secondary:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(137,191,255,.6);
+    }
+
+    /* Canvas + HUD */
+    .game-panel{ display:block; }
+    .game-panel.hidden{ display:none; }
+    .game-wrap{ position:relative; }
+    #waiting-game{
+    width:100%;
+    height:auto;
+    background: rgba(2,12,40,.9);
+    border:2px solid rgba(60,140,255,.8);
+    border-radius:8px;
+    display:block;
+    }
+    .hud{
+    position:absolute; top:6px; left:10px;
+    color:#a0cfff; font: 12px/1.2 monospace;
+    }
+    .hud .go{ margin-left:12px; color:#ff8080; }
+    .hidden{ display:none !important; }
+
+    /* Quita escalado en contenedores grandes para evitar "tintineo" */
+    .welcome-box:hover, .updates-box:hover, .premium-box:hover,
+    .players-section:hover, .online-streams:hover {
+    transform:none; background: rgba(0,38,77,.5);
+    }
+
+    /* Asegura estética compacta del music panel (si hay reglas duplicadas, prevalece esta) */
+    #music-panel{
+    background: linear-gradient(135deg, #0a1e40 0%, #061730 90%);
+    border: 2px solid rgba(60, 140, 255, 0.6);
+    border-radius:14px; padding:12px 16px; min-height:auto;
+    display:flex; flex-direction:column; gap:10px; color:#e3eaff;
+    }
+    .music-results{
+    display:grid; gap:10px; max-height:180px; overflow:auto;
+    }
+    .track{
+    display:flex; justify-content:space-between; align-items:center;
+    background: rgba(15,25,70,.9);
+    border:1px solid rgba(137,191,255,.4);
+    border-radius:8px; padding:10px 14px; font-size:.9rem; gap:12px;
+    }
+    /* ==== Code Player (Premium) ==== */
+    .code-player{
+    flex: 0 0 360px;
+    display: flex; flex-direction: column; gap: 8px;
+    background: rgba(8,18,55,0.92);
+    border: 1px solid rgba(120,180,255,0.6);
+    border-radius: 12px; padding: 10px 12px;
+    box-shadow: 0 0 22px rgba(80,200,255,0.25), inset 0 0 10px rgba(80,200,255,0.08);
+    }
+    .cp-head{ display:flex; align-items:center; justify-content:space-between; }
+    .cp-title{ font-weight:700; letter-spacing: .3px; }
+    .cp-badge{
+    font-size:.7rem; padding:2px 8px; border-radius:999px;
+    background:linear-gradient(135deg,#2f4f9f,#1f2f6f);
+    }
+    .cp-body{ display:flex; gap:8px; align-items:center; }
+    .cp-input{
+    flex:1;
+    background: rgba(25,40,120,0.85); color:#e8eeff;
+    border:1px solid rgba(137,191,255,.5);
+    border-radius:8px; padding:8px 10px; outline:none;
+    }
+    .cp-actions{ display:flex; gap:6px; }
+    .cp-btn{
+    border:none; border-radius:8px; padding:8px 12px; cursor:pointer;
+    font-weight:700; font-size:.85rem; color:#fff;
+    transition:transform .12s ease, filter .12s ease;
+    }
+    .cp-btn.play{ background:linear-gradient(135deg,#1f3f8f,#2f6fbf); }
+    .cp-btn.stop{ background:linear-gradient(135deg,#7a2330,#b13b4c); }
+    .cp-btn:hover{ transform:translateY(-1px); filter:brightness(1.05); }
+    .cp-hint{ font-size:.7rem; color:#a8c7ff; opacity:.8; }
+    @media (max-width: 1050px){
+    .code-player{ flex: 1 1 100%; }
+    }
+    
+    /* ---- Layout: el juego ocupa todo el ancho de la fila ---- */
+    .top-row{display:grid;grid-template-columns:3fr 1fr;gap:16px}
+    #music-panel{grid-column:1/2}
+    #play-card{grid-column:1/-1} /* hace el panel largo como pediste */
+
+    /* ---- Look neón/espacial para el panel del juego ---- */
+    .play-card{
+        background:#06080f;
+        border:1px solid rgba(0,255,255,.15);
+        box-shadow:
+        0 0 24px rgba(0,255,255,.12),
+        inset 0 0 60px rgba(0,0,0,.7);
+        border-radius:18px;
+    }
+    .play-card-header{
+        display:flex;justify-content:space-between;align-items:center;
+        padding:12px 16px;border-bottom:1px solid rgba(0,255,255,.08)
+    }
+    #start-game-btn,#restart-btn{
+        background:linear-gradient(90deg,#00eaff,#008cff);
+        color:#061018;border:none;border-radius:10px;
+        padding:8px 14px;font-weight:700;cursor:pointer;
+        box-shadow:0 0 14px rgba(0,200,255,.35);
+        transition:transform .15s ease, box-shadow .2s ease;
+    }
+    #start-game-btn:hover,#restart-btn:hover{transform:translateY(-1px);box-shadow:0 0 18px rgba(0,200,255,.55)}
+
+    .game-panel{padding:10px 12px}
+    .game-wrap{position:relative;border-radius:14px;overflow:hidden;
+        background: radial-gradient(1200px 400px at 10% -10%,rgba(0,150,255,.15),transparent 45%),
+                    radial-gradient(1000px 500px at 90% 120%,rgba(0,255,200,.12),transparent 50%),
+                    #05070f;
+        border:1px solid rgba(0,255,255,.08);
+        box-shadow: inset 0 0 40px rgba(0,0,0,.65), 0 0 20px rgba(0,140,255,.12);
+    }
+    .game-wrap canvas{width:100%;height:auto;display:block}
+
+    .hud{
+        position:absolute;top:6px;left:10px;
+        font-family:'Space Grotesk',system-ui,Segoe UI,Roboto,sans-serif;
+        font-weight:700;font-size:14px;color:#aee8ff;display:flex;gap:10px
+    }
+    .hud .go{color:#ff6b6b;margin-left:8px}
+
