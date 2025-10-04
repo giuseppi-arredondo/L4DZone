@@ -55,10 +55,10 @@
         </nav>
 
         <div class="user-info">
-        <p>Visitor</p>
-        <button type="button">Login Steam</button>
+        <p id="userName">Visitor</p>
+        <button id="loginBtn" type="button" onclick="location.href='/auth/steam'">Login Steam</button>
+        <button id="logoutBtn" type="button" style="display:none" onclick="logout()">Logout</button>
         </div>
-    </header>
 
     <!-- MODAL -->
     <div id="modalOverlay" class="modal-overlay" style="display:none" onclick="closeModal()">

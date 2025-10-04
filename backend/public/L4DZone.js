@@ -920,31 +920,3 @@
         ensurePartyCard();
     });
     })();
-
-        <script>
-    async function fetchMe(){
-    try{
-        const r = await fetch('/api/me', { credentials: 'include' });
-        if(!r.ok) throw 0;
-        const me = await r.json();
-
-        // Mostrar nombre (y podrías usar me.avatar si quieres)
-        const el = document.getElementById('userName');
-        if (el) el.textContent = me.name || 'Visitor';
-
-        // Flags para tu UI (premium/100h)
-        document.body.dataset.premium = me.is_premium ? "1" : "0";
-        document.body.dataset.has100h = me.eligible_100h ? "1" : "0";
-
-        // Toggle botones
-        document.getElementById('loginBtn')?.style.setProperty('display','none');
-        document.getElementById('logoutBtn')?.style.removeProperty('display');
-    }catch{
-        // No autenticado
-        document.getElementById('loginBtn')?.style.removeProperty('display');
-        document.getElementById('logoutBtn')?.style.setProperty('display','none');
-    }
-    }
-    async function logout(){ await fetch('/api/logout',{method:'POST'}); location.reload(); }
-    document.addEventListener('DOMContentLoaded', fetchMe);
-    </script>
