@@ -19,18 +19,41 @@
     <link rel="stylesheet" href="./L4DZone.css" />
     <link rel="stylesheet" href="./L4DZone_2.css" />
     <link rel="stylesheet" href="./L4DZone_3.css" />
+
+    <!-- === Ajuste fino del Global Chat (ancho ~794px y alineado al inicio de Welcome) === -->
+    <style>
+    :root{
+        /* mismo gutter (margen izquierdo) que usa el layout de las tarjetas */
+        --gutter-left: 56px;  /* si tu Welcome empieza un poco antes/después, ajusta aquí en pasos de 4-8px */
+    }
+
+    /* Asegura que Welcome y Chat parten del mismo punto */
+    .welcome-box{ margin-left: var(--gutter-left) !important; }
+
+    /* Global Chat: ligeramente más pequeño y arrancando a la izquierda (igual que Welcome) */
+    .chat-global{
+        width: 794px !important;      /* pedido: aprox 794 */
+        max-width: none !important;
+        margin-left: var(--gutter-left) !important;
+    }
+
+    /* opcional: si quieres que se reduzca un pelín en pantallas medianas */
+    @media (max-width: 1400px){
+        .chat-global{ width: 780px !important; }
+    }
+    </style>
     </head>
 
     <body>
     <!-- HEADER -->
     <header>
-        <div class="logo">
+    <div class="logo">
         <span class="site-name">L4D</span>
         <img src="./Imagenes/Logo_l4dzone.png" alt="L4DZone Logo" class="logo-img" />
         <span class="site-name">one</span>
-        </div>
+    </div>
 
-        <nav id="menu">
+    <nav id="menu">
         <button type="button" onclick="openModal('faq')">FAQ</button>
         <button type="button" onclick="openModal('rules')">Rules</button>
         <button type="button" onclick="openModal('stats')">Stats</button>
@@ -38,157 +61,198 @@
         <button type="button" onclick="openModal('maps')">Maps</button>
         <button type="button" onclick="openModal('source_bans')">SourceBans</button>
         <button type="button" onclick="openModal('contact_admins')">Contact Admins</button>
-        </nav>
+    </nav>
 
-        <div class="user-info">
+    <div class="user-info">
         <p id="userName">Visitor</p>
         <button id="loginBtn" type="button" onclick="location.href='/auth/steam'">Login Steam</button>
         <button id="logoutBtn" type="button" style="display:none" onclick="logout()">Logout</button>
-        </div>
+    </div>
     </header>
 
     <!-- MODAL -->
     <div id="modalOverlay" class="modal-overlay" style="display:none" onclick="closeModal()">
-        <div class="modal-blur"></div>
-        <div class="modal-container narrow" onclick="event.stopPropagation()">
+    <div class="modal-blur"></div>
+    <div class="modal-container narrow" onclick="event.stopPropagation()">
         <span class="close-btn" onclick="closeModal()">&times;</span>
 
         <div class="modal-nav-bar">
-            <button onclick="loadSection('faq')">FAQ</button>
-            <button onclick="loadSection('rules')">Rules</button>
-            <button onclick="loadSection('stats')">Stats</button>
-            <button onclick="loadSection('ratings')">Ratings</button>
-            <button onclick="loadSection('maps')">Maps</button>
-            <button onclick="loadSection('source_bans')">SourceBans</button>
-            <button onclick="loadSection('contact_admins')">Contact Admins</button>
+        <button onclick="loadSection('faq')">FAQ</button>
+        <button onclick="loadSection('rules')">Rules</button>
+        <button onclick="loadSection('stats')">Stats</button>
+        <button onclick="loadSection('ratings')">Ratings</button>
+        <button onclick="loadSection('maps')">Maps</button>
+        <button onclick="loadSection('source_bans')">SourceBans</button>
+        <button onclick="loadSection('contact_admins')">Contact Admins</button>
         </div>
 
         <div id="modalBody" class="modal-body"></div>
-        </div>
+    </div>
     </div>
 
-    <!-- ======= TOP ROW: 3/4 (Now Playing) + 1/4 (Jugar) ======= -->
+    <!-- ======= TOP ROW: Welcome (izq) + Party (centro) + Jugar (der) ======= -->
     <section class="top-row">
-        <!-- 3/4: Now Playing -->
-        <section id="music-panel" class="dashboard-card">
-        <div class="title-block">
-            <div class="panel-title">
-            <span class="main-title">Now Playing</span>
-            <span class="sub-badge">Shared</span>
-            </div>
-            <div class="feature-tag">Premium Feature</div>
+    <!-- Welcome -->
+    <section class="welcome-box top-card">
+        <h2>Welcome!</h2>
+        <p>What is L4DZone?</p>
+        <p>
+        L4DZone is your ideal place for Left 4 Dead 2 gameplay, offering a fair environment with no cheaters, ragequitters, or toxicity. Enjoy balanced matchmaking, the best AntiCheat system by <strong>Lalo HLZ</strong>, and constant updates for the best gaming experience. Before jumping in, make sure to check out our guides, FAQs, and queue info to get the most out of the action.
+        </p>
+    </section>
+
+    <!-- Party (Premium) -->
+    <aside id="party-card" class="play-card top-card">
+        <div class="party-wrap">
+        <h3>👥 <span>Party</span> <small style="opacity:.7;font-weight:600">Premium</small></h3>
+        <div class="party-row">
+            <button id="party-create" class="party-create">Create / Generate</button>
         </div>
-
-        <div class="search-block">
-            <div class="input-wrapper">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor"
-                d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z" />
-            </svg>
-            <input id="track-query" placeholder="Search track (e.g., chill, retro)" aria-label="Track search" />
-            </div>
-            <div class="buttons">
-            <button id="search-btn" class="small">Search</button>
-            <button id="enable-audio-btn" class="small">Enable Audio</button>
-            </div>
+        <div class="party-field"><!-- Se rellena por JS (input / badge / lista jugadores) --></div>
         </div>
+    </aside>
 
-        <div id="results" class="music-results"></div>
-
-        <div id="now-playing" class="now-playing hidden">
-            <div class="np-info">
-            <div><strong>Track:</strong> <span id="np-title">—</span></div>
-            <div><strong>Artist:</strong> <span id="np-artist">—</span></div>
-            <div><strong>Length:</strong> <span id="np-duration">--:--</span></div>
-            </div>
-            <div class="np-controls">
-            <button id="pause-btn" aria-label="Pause/resume">Pause</button>
-            <button id="stop-btn" aria-label="Stop">Stop</button>
-            </div>
-        </div>
-        </section>
-
-        <!-- 1/4: Jugar -->
-        <aside id="play-card" class="play-card">
+    <!-- Jugar -->
+    <aside id="play-card" class="play-card top-card">
         <div class="play-card-header">
-            <span>¿Te aburre esperar?</span>
-            <button id="start-game-btn" class="btn-primary">Jugar</button>
+        <span>Bored while waiting?</span>
+        <button id="start-game-btn" class="btn-primary">Play</button>
         </div>
 
         <div id="game-panel" class="game-panel hidden">
-            <div class="game-wrap">
-            <canvas id="waiting-game" width="500" height="140"></canvas>
+        <div class="game-wrap">
+            <canvas id="waiting-game" width="720" height="180"></canvas>
             <div class="hud">
-                Score: <span id="score">0</span>
-                <span id="game-over" class="go hidden">
+            Score: <span id="score">0</span>
+            <span id="game-over" class="go hidden">
                 Game Over – <button id="restart-btn" class="btn-secondary">Reiniciar</button>
-                </span>
-            </div>
+            </span>
             </div>
         </div>
-        </aside>
+        </div>
+    </aside>
     </section>
 
     <!-- CONTENIDO INFERIOR -->
     <main>
-        <div class="main-content">
-        <section class="welcome-box">
-            <h2>Welcome!</h2>
-            <p>What is L4DZone?</p>
-            <p>
-            L4DZone is your ideal place for Left 4 Dead 2 gameplay, offering a fair environment with no cheaters, ragequitters, or toxicity. Enjoy balanced matchmaking, the best AntiCheat system by Lalo HLZ, and constant updates for the best gaming experience. Before jumping in, make sure to check out our guides, FAQs, and queue info to get the most out of the action.
-            </p>
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="main-content">
+        <!-- Global Chat -->
+        <section class="chat-global">
+        <h2>Global Chat:</h2>
+        <div class="chat-box">
+            <div class="chat-container"></div>
+            <div class="chat-input-wrapper">
+            <textarea class="chat-input" placeholder="Type a message..."></textarea>
+            <button class="chat-submit-btn" type="button">▶</button>
+            </div>
+        </div>
         </section>
 
         <section class="updates-box">
-            <h2>Latest Updates</h2>
-            <p>Stay tuned for upcoming news, including new videos on our YouTube channel, updates, or live streams!</p>
-            <div class="youtube-placeholder">YouTube Banner Placeholder</div>
+        <h2>Latest Updates</h2>
+        <p>Stay tuned for upcoming news, including new videos on our YouTube channel, updates, or live streams!</p>
+        <div class="youtube-placeholder">YouTube Banner Placeholder</div>
         </section>
 
         <section class="premium-box">
-            <h2>Unlock Premium Features</h2>
-            <p>Explore all the exclusive benefits that Premium has to offer. Click here to enhance your gaming experience now!</p>
-            <button type="button">View Premium Benefits</button>
+        <h2>Unlock Premium Features</h2>
+        <p>Explore all the exclusive benefits that Premium has to offer. Click here to enhance your gaming experience now!</p>
+        <button type="button">View Premium Benefits</button>
         </section>
-        </div>
+    </div>
 
-        <aside class="side-content">
-        <section class="chat-global">
-            <h2>Global Chat:</h2>
-            <div class="chat-box">
-            <div class="chat-container"></div>
-            <div class="chat-input-wrapper">
-                <textarea class="chat-input" placeholder="Type a message..."></textarea>
-                <button class="chat-submit-btn" type="button">▶</button>
-            </div>
-            </div>
-        </section>
-
+    <!-- COLUMNA DERECHA -->
+    <aside class="side-content">
         <section class="players-section">
-            <h2>Players:</h2>
-            <div class="players-info">
+        <h2>Players:</h2>
+        <div class="players-info">
             <div><h4>Online:</h4><span>0</span></div>
             <div><h4>In Game:</h4><span>0</span></div>
             <div><h4>In Waiting:</h4><span>0</span></div>
-            </div>
+        </div>
         </section>
-        </aside>
+    </aside>
 
-        <section class="play-queue-stream-section">
+    <section class="play-queue-stream-section">
         <div class="play-queue">
-            <button class="play-queue-btn">Play Queue</button>
-            <div class="waiting-list"></div>
+        <button class="play-queue-btn">Play Queue</button>
+        <div class="waiting-list"></div>
         </div>
         <div class="online-streams">
-            <h2>Online Streamers:</h2>
-            <div class="stream-content"></div>
+        <h2>Online Streamers:</h2>
+        <div class="stream-content"></div>
         </div>
-        </section>
+    </section>
     </main>
+
+    <!-- === Music Quick Panel (FAB + Drawer + Modal) === -->
+    <button id="music-fab" aria-label="Music">🎵</button>
+
+    <aside id="music-drawer" aria-hidden="true">
+    <header>
+        <h3>Music Control</h3>
+        <button id="music-close" aria-label="Close">✕</button>
+    </header>
+
+    <div class="music-body">
+        <label for="music-id-input">Track ID</label>
+        <input id="music-id-input" type="text" placeholder="Enter track ID..." />
+
+        <div class="music-actions">
+        <button id="music-confirm" class="btn-primary">Confirm</button>
+        <button id="music-open-list" class="btn-secondary">ID List</button>
+        </div>
+
+        <p class="hint">Tip: paste your track ID and press Confirm.</p>
+    </div>
+    </aside>
+
+    <!-- === Modal: ID List === -->
+    <div id="music-list-modal" class="music-modal" aria-hidden="true">
+    <div class="music-modal__backdrop"></div>
+    <div class="music-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="music-list-title">
+        <header class="music-modal__header">
+        <h3 id="music-list-title">Available IDs</h3>
+        <button id="music-list-close" aria-label="Close">✕</button>
+        </header>
+
+        <div class="music-modal__content">
+        <table class="music-table" id="music-list-table">
+            <thead>
+            <tr>
+                <th style="width: 36%">Title</th>
+                <th style="width: 24%">Artist</th>
+                <th style="width: 24%">ID</th>
+                <th style="width: 16%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Se llena por JS -->
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
 
     <!-- JS principal -->
     <script src="./L4DZone.js"></script>
     <script src="./Codes.js" defer></script>
+
+    <!-- Fix header scroll (sin tintineo) -->
+    <script>
+    (function(){
+        const header = document.querySelector('header');
+        if(!header) return;
+        let last=false;
+        window.addEventListener('scroll', () => {
+        const s = window.scrollY > 50;
+        if (s !== last){
+            header.classList.toggle('scrolled', s);
+            last = s;
+        }
+        }, {passive:true});
+    })();
+    </script>
     </body>
     </html>
