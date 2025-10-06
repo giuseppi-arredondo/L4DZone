@@ -1124,7 +1124,7 @@ body.playing #play-card .play-card-header{ display:none; }
 
     /* === GLOBAL CHAT ALINEADO CON WELCOME Y PARTY === */
     .chat-global {
-    width: 840px !important;            /* ajusta el ancho exacto */
+    width: 774px !important;            /* ajusta el ancho exacto */
     max-width: none !important;
     margin-left: 240px !important;      /* lo posiciona donde empieza 'Welcome' */
     
@@ -1154,6 +1154,108 @@ body.playing #play-card .play-card-header{ display:none; }
     }
 
     .chat-global {
-  margin-left: 48px !important; /* antes 56px, lo movemos un poco más a la izquierda */
-}
+    position: relative;
+    left: -237px; /* mueve todo el cuadro 30px hacia la izquierda */
+    }
 
+
+    /* ====== Fila: Chat + derecha ====== */
+    .chat-row{
+    display:flex;
+    align-items:flex-start;
+    gap:24px;
+    /* un pequeño empuje hacia abajo si hace falta */
+    margin-top: 8px;
+    }
+
+    /* Mantén tu posicionamiento actual del chat (ya lo tienes ajustado) */
+    /* Ejemplo: 
+    .chat-global{
+    width: 774px !important;
+    margin-left: 240px !important;
+    position: relative;
+    left: -237px;
+    }
+    */
+
+    /* Columna derecha (ocupa el espacio libre a la derecha del chat) */
+    .right-stack{
+    flex:1;
+    min-width: 420px;       /* no más chico que esto */
+    max-width: 560px;       /* tope visual para que armonice con Party */
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    }
+
+    /* Tarjetas de la derecha con look del sitio */
+    .card{
+    border-radius: 16px;
+    border: 1px solid rgba(0, 200, 255, 0.35);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.15),
+                inset 0 0 8px rgba(0, 200, 255, 0.08);
+    background: rgba(10, 20, 30, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 14px;
+    }
+
+    /* Títulos consistentes */
+    .updates-box h2,
+    .premium-box h2{
+    color:#33baff;
+    font-weight:700;
+    text-shadow:0 0 6px rgba(0,180,255,.6);
+    margin:4px 0 10px;
+    }
+
+    /* --- Video 16:9 --- */
+    .video-16x9{
+    width:100%;
+    aspect-ratio:16/9;           /* moderno */
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(0, 200, 255, 0.25);
+    box-shadow: inset 0 0 6px rgba(0, 200, 255, 0.08);
+    background: radial-gradient(120% 120% at 10% 10%, #0a1420 0%, #060b12 60%, #05070b 100%);
+    }
+
+    /* Si usas iframe de YouTube, ocupará todo el marco */
+    .video-16x9 iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    }
+
+    /* Placeholder bonito mientras no hay iframe */
+    .video-placeholder{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:#8bd3ff;
+    font-weight:600;
+    letter-spacing:.3px;
+    opacity:.9;
+    }
+
+    /* Premium: botones */
+    .premium-box button{
+    margin-top:10px;
+    padding:.6rem 1rem;
+    border-radius:12px;
+    border:1px solid rgba(0,200,255,.35);
+    background: linear-gradient(180deg, #1ec6ff 0%, #00a8ff 100%);
+    color:#00131e;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,168,255,.25);
+    transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .premium-box button:hover{
+    transform: translateY(-1px);
+    box-shadow:0 6px 18px rgba(0,168,255,.35);
+    }

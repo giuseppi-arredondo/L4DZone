@@ -20,26 +20,102 @@
     <link rel="stylesheet" href="./L4DZone_2.css" />
     <link rel="stylesheet" href="./L4DZone_3.css" />
 
-    <!-- === Ajuste fino del Global Chat (ancho ~794px y alineado al inicio de Welcome) === -->
+    <!-- === Ajuste fino (solo lo necesario) === -->
     <style>
     :root{
-        /* mismo gutter (margen izquierdo) que usa el layout de las tarjetas */
-        --gutter-left: 56px;  /* si tu Welcome empieza un poco antes/después, ajusta aquí en pasos de 4-8px */
+    /* mismo gutter (margen izquierdo) que usa el layout de las tarjetas */
+    --gutter-left: 56px;
     }
 
     /* Asegura que Welcome y Chat parten del mismo punto */
     .welcome-box{ margin-left: var(--gutter-left) !important; }
 
-    /* Global Chat: ligeramente más pequeño y arrancando a la izquierda (igual que Welcome) */
+    /* Global Chat: (dejamos igual que lo tenías) */
     .chat-global{
-        width: 794px !important;      /* pedido: aprox 794 */
-        max-width: none !important;
-        margin-left: var(--gutter-left) !important;
+    width: 794px !important;
+    max-width: none !important;
+    margin-left: var(--gutter-left) !important;
     }
 
-    /* opcional: si quieres que se reduzca un pelín en pantallas medianas */
+    /* Fila que contiene: [Chat izq] + [Latest/Premium der] */
+    .chat-row{
+    display:flex;
+    align-items:flex-start;
+    gap:24px;                 /* separación entre las dos columnas */
+    margin-top: 8px;
+    }
+
+    /* Columna derecha (Latest arriba con 16:9 + Premium abajo) */
+    .right-stack{
+    flex:1;
+    min-width: 420px;         /* controla el mínimo del bloque derecho */
+    max-width: 560px;         /* tope visual para que combine con Party */
+    display:flex;
+    flex-direction:column;
+    gap:16px;                 /* separación vertical entre Latest y Premium */
+    }
+
+    /* Marco 16:9 “Latest” */
+    .video-16x9{
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(0, 200, 255, 0.25);
+    box-shadow: inset 0 0 6px rgba(0, 200, 255, 0.08);
+    background: radial-gradient(120% 120% at 10% 10%, #0a1420 0%, #060b12 60%, #05070b 100%);
+    }
+    .video-16x9 iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    }
+    .video-16x9 .video-placeholder{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:#8bd3ff;
+    font-weight:600;
+    letter-spacing:.3px;
+    opacity:.9;
+    }
+
+    /* Un look de tarjeta para que combinen (si tu CSS ya lo da, esto no molesta) */
+    .right-stack .updates-box,
+    .right-stack .premium-box{
+    border-radius: 16px;
+    border: 1px solid rgba(0, 200, 255, 0.35);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.15),
+                inset 0 0 8px rgba(0, 200, 255, 0.08);
+    background: rgba(10, 20, 30, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 14px;
+    }
+    .right-stack .updates-box h2,
+    .right-stack .premium-box h2{
+    color:#33baff;
+    font-weight:700;
+    text-shadow:0 0 6px rgba(0,180,255,.6);
+    margin:4px 0 10px;
+    }
+
+    /* Players debajo de la fila del chat + columna derecha */
+    .players-below{
+    margin-left: var(--gutter-left);
+    margin-top: 20px;
+    /* si quieres que ocupe el ancho de la fila completa: */
+    width: calc(100% - var(--gutter-left) - 24px);
+    }
+
+    /* Resp. ligera */
     @media (max-width: 1400px){
-        .chat-global{ width: 780px !important; }
+    .chat-global{ width: 780px !important; }
+    .right-stack{ min-width: 380px; max-width: 520px; }
     }
     </style>
     </head>
@@ -135,9 +211,9 @@
 
     <!-- CONTENIDO INFERIOR -->
     <main>
-    <!-- COLUMNA IZQUIERDA -->
-    <div class="main-content">
-        <!-- Global Chat -->
+    <!-- Fila: Chat izquierda + Columna derecha (Latest + Premium) -->
+    <div class="chat-row">
+        <!-- Izquierda: Global Chat (NO toqué tu tamaño/posición) -->
         <section class="chat-global">
         <h2>Global Chat:</h2>
         <div class="chat-box">
@@ -149,21 +225,32 @@
         </div>
         </section>
 
+        <!-- Derecha: Latest (16:9) + Premium apilados -->
+        <aside class="right-stack">
         <section class="updates-box">
-        <h2>Latest Updates</h2>
-        <p>Stay tuned for upcoming news, including new videos on our YouTube channel, updates, or live streams!</p>
-        <div class="youtube-placeholder">YouTube Banner Placeholder</div>
+            <h2>Latest Updates</h2>
+            <div class="video-16x9">
+            <!-- Reemplaza por tu iframe si quieres mostrar un video real:
+            <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID"
+                title="YouTube video"
+                allowfullscreen
+                loading="lazy"></iframe>
+            -->
+            <div class="video-placeholder">YouTube Banner Placeholder</div>
+            </div>
         </section>
 
         <section class="premium-box">
-        <h2>Unlock Premium Features</h2>
-        <p>Explore all the exclusive benefits that Premium has to offer. Click here to enhance your gaming experience now!</p>
-        <button type="button">View Premium Benefits</button>
+            <h2>Unlock Premium Features</h2>
+            <p>Explore all the exclusive benefits that Premium has to offer. Click here to enhance your gaming experience now!</p>
+            <button type="button">View Premium Benefits</button>
         </section>
+        </aside>
     </div>
 
-    <!-- COLUMNA DERECHA -->
-    <aside class="side-content">
+    <!-- Players debajo de la fila (no al costado) -->
+    <aside class="players-below">
         <section class="players-section">
         <h2>Players:</h2>
         <div class="players-info">
@@ -174,6 +261,7 @@
         </section>
     </aside>
 
+    <!-- Lo demás sin cambios -->
     <section class="play-queue-stream-section">
         <div class="play-queue">
         <button class="play-queue-btn">Play Queue</button>
@@ -238,21 +326,5 @@
     <!-- JS principal -->
     <script src="./L4DZone.js"></script>
     <script src="./Codes.js" defer></script>
-
-    <!-- Fix header scroll (sin tintineo) -->
-    <script>
-    (function(){
-        const header = document.querySelector('header');
-        if(!header) return;
-        let last=false;
-        window.addEventListener('scroll', () => {
-        const s = window.scrollY > 50;
-        if (s !== last){
-            header.classList.toggle('scrolled', s);
-            last = s;
-        }
-        }, {passive:true});
-    })();
-    </script>
     </body>
     </html>
